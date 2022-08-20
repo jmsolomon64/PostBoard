@@ -8,7 +8,12 @@ namespace PostBoard.Server.Models
         public int Id { get; set; }
 
         [Required]
+        public string OwnerId { get; set; }
+
+        [Required]
         public int PostId { get; set; }
+
+        public virtual PostEntity Post { get; set; }
 
         [Required]
         public DateTime Posted { get; set; }

@@ -38,6 +38,7 @@ namespace PostBoard.Server.Services.Post
 
             if (entity?.OwnerId != _userId) return false;
 
+            _context.Posts.Remove(entity);
             return await _context.SaveChangesAsync() == 1;
         }
 
