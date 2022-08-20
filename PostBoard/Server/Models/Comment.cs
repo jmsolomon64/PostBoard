@@ -13,6 +13,8 @@ namespace PostBoard.Server.Models
         [Required]
         public DateTime Posted { get; set; }
 
+        public DateTime Modified { get; set; }
+
         [Required]
         [MaxLength(100000)]
         public string Content { get; set; }

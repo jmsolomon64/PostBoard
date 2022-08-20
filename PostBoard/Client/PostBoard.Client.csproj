@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Shared\PostBoard.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Shared\Comment\" />
-  </ItemGroup>
-
 </Project>
