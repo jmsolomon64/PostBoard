@@ -81,6 +81,22 @@ namespace PostBoard.Server.Services.Post
             return await postQuery.ToListAsync();
         }
 
+        public async Task<IEnumerable<PostListItem>> GetPostsByCategoryAsync(int categoryId)
+        {
+            var postQuery = _context.Posts
+                .Where(x => x.CategoryId == categoryId)
+                .Select(x => new PostListItem()
+                {
+                    Id = x.Id,
+                    CategoryName = x.Category.Name,
+                    Title = x.Title,
+                    Posted = x.Posted,
+                    Modified = x.Modified
+                });
+
+            return await postQuery.ToListAsync();
+        }
+
         public async Task<PostDetail> GetPostByIdAsync(int postId)
         {
             var entity = await _context.Posts
@@ -114,6 +130,7 @@ namespace PostBoard.Server.Services.Post
             entity.CategoryId = model.CategoryId;
             entity.Title = model.Title;
             entity.Content = model.Content;
+            entity.Modified = DateTime.Now;
 
             return await _context.SaveChangesAsync() == 1;
         }

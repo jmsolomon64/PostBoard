@@ -3,11 +3,15 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using PostBoard.Server.Data;
 using PostBoard.Server.Models;
+using PostBoard.Server.Services.Categroy;
+using PostBoard.Server.Services.Comment;
 using PostBoard.Server.Services.Post;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IPostService, PostService>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

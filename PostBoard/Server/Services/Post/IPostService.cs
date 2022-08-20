@@ -6,6 +6,7 @@ namespace PostBoard.Server.Services.Post
     {
         Task<IEnumerable<PostListItem>> GetAllUserPostsAsync();
         Task<IEnumerable<PostListItem>> GetAllPostsAsync();
+        Task<IEnumerable<PostListItem>> GetPostsByCategoryAsync(int categoryId);
         Task<bool> CreatePostAsync(PostCreate model);
         Task<PostDetail> GetPostByIdAsync(int postId);
         Task<bool> UpdatePostAsync(PostEdit model);
