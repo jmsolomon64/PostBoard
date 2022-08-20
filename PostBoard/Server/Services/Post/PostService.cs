@@ -34,7 +34,7 @@ namespace PostBoard.Server.Services.Post
 
         public async Task<bool> DeletePostAsync(int postId)
         {
-            var entity = _context.Posts.FirstOrDefault(x => x.Id == postId);
+            var entity = await _context.Posts.FirstOrDefaultAsync(x => x.Id == postId);
 
             if (entity?.OwnerId != _userId) return false;
 
@@ -89,7 +89,7 @@ namespace PostBoard.Server.Services.Post
         {
             if (model == null) return false;
 
-            var entity = _context.Posts.FirstOrDefault(x => x.Id == model.Id);
+            var entity = await _context.Posts.FirstOrDefaultAsync(x => x.Id == model.Id);
 
             //Checks to see if User owns the post
             if (entity?.OwnerId != _userId) return false;

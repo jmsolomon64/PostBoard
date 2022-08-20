@@ -2,7 +2,7 @@
 
 namespace PostBoard.Client.Shared.Category
 {
-    public class CategroyCreate
+    public class CategoryCreate
     {
         [Required]
         public string Name { get; set; }
