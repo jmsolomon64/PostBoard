@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PostBoard.Client.Shared.Post
+namespace PostBoard.Shared.Post
 {
     public class PostEdit
     {

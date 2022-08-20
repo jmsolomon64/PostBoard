@@ -1,6 +1,6 @@
-﻿using PostBoard.Client.Shared.Post;
+﻿using PostBoard.Shared.Post;
 
-namespace PostBoard.Client.Shared.Category
+namespace PostBoard.Shared.Category
 {
     public class CategoryDetail
     {

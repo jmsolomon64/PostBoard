@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.Presentation;
-
-namespace PostBoard.Client.Shared.Post
+﻿namespace PostBoard.Shared.Post
 {
     public class PostListItem
     {

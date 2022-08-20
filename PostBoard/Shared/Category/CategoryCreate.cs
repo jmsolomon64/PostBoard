@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PostBoard.Client.Shared.Category
+namespace PostBoard.Shared.Category
 {
-    public class CategoryEdit
+    public class CategoryCreate
     {
-        public int Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 

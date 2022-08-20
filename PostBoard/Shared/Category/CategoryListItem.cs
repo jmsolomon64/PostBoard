@@ -1,4 +1,4 @@
-﻿namespace PostBoard.Client.Shared.Category
+﻿namespace PostBoard.Shared.Category
 {
     public class CategoryListItem
     {

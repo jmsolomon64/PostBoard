@@ -1,8 +1,8 @@
-﻿@page "/category/create"
+﻿@page "/post/create"
 @attribute [Authorize]
 @inject HttpClient http
-@using PostBoard.Client.Shared.Category
-@using PostBoard.Client.Shared.Post
+@using PostBoard.Shared.Category
+@using PostBoard.Shared.Post
 @inject NavigationManager nav 
 
 <h3>What's On Your Mind?</h3>
@@ -19,15 +19,22 @@
         <div class="form-group">
             <label class="control-label">Category</label>
             <InputSelect @bind-Value="model.CategoryId" class="form-control">
-                @foreach (CategoryListItem category in categories)
+                @if(categories == null)
                 {
-                    <option value="@category.Id">@category.Name</option>
+                    <option value="0">No categories available</option>
+                }
+                else
+                {
+                    @foreach (CategoryListItem category in categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
                 }
             </InputSelect>
         </div>
         <div class="form-group">
             <label class="control-label">Title</label>
-            <InputText class="form-control" @bind-Value="model.Title" />
+            <InputText class="form-control" @bind-Value="model." />
         </div>
         <div class="form-group">
             <label class="control-label">Content</label>
@@ -38,12 +45,21 @@
 </div>
 
 @code {
-    private PostCreate model = new PostCreate();
+    private PostCreate model = new ();
     private string errorMessage;
     private List<CategoryListItem> categories;
 
     private async void HandleSubmit()
     {
-        var createResults = await http.PostAsJsonAsync<PostCreate>("/api/")
+        var createResults = await http.PostAsJsonAsync<PostCreate>("/api/post", model);
+
+        if(createResults.IsSuccessStatusCode)
+        {
+            nav.NavigateTo("/post");
+        }
+        else
+        {
+            errorMessage = "Could not publish Post. Please try again later.";
+        }
     }
 }

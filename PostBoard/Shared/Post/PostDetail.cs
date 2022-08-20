@@ -1,8 +1,7 @@
-﻿using DocumentFormat.OpenXml.Office2021.PowerPoint.Comment;
-using PostBoard.Client.Shared.Category;
-using PostBoard.Client.Shared.Comment;
+﻿using PostBoard.Shared.Category;
+using PostBoard.Shared.Comment;
 
-namespace PostBoard.Client.Shared.Post
+namespace PostBoard.Shared.Post
 {
     public class PostDetail
     {
