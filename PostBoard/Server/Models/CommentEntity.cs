@@ -2,7 +2,7 @@
 
 namespace PostBoard.Server.Models
 {
-    public class Comment
+    public class CommentEntity
     {
         [Required]
         public int Id { get; set; }
@@ -12,6 +12,8 @@ namespace PostBoard.Server.Models
 
         [Required]
         public DateTime Posted { get; set; }
+
+        public DateTime Modified { get; set; }
 
         [Required]
         [MaxLength(100000)]

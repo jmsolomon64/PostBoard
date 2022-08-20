@@ -2,7 +2,7 @@
 
 namespace PostBoard.Server.Models
 {
-    public class Category
+    public class CategoryEntity
     {
         [Required]
         public int Id { get; set; }

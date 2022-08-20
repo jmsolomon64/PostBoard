@@ -6,5 +6,6 @@ namespace PostBoard.Client.Shared.Comment
     {
         [Required]
         public string Content { get; set; }
+
     }
 }

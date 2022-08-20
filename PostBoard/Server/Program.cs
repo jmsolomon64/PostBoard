@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using PostBoard.Server.Data;
 using PostBoard.Server.Models;
+using PostBoard.Server.Services.Post;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<IPostService, PostService>();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
