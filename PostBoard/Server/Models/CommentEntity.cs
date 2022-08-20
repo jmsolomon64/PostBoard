@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PostBoard.Server.Models
 {
@@ -13,6 +14,7 @@ namespace PostBoard.Server.Models
         [Required]
         public int PostId { get; set; }
 
+        [JsonIgnore]
         public virtual PostEntity Post { get; set; }
 
         [Required]

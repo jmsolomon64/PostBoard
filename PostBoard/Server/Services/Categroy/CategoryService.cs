@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PostBoard.Client.Shared.Category;
+using PostBoard.Client.Shared.Post;
 using PostBoard.Server.Data;
 using PostBoard.Server.Models;
 
@@ -58,7 +59,9 @@ namespace PostBoard.Server.Services.Categroy
 
         public async Task<CategoryDetail> GetCategoryByIdAsync(int categoryId)
         {
-            var entity = await _context.Categories.FirstOrDefaultAsync(x => x.Id == categoryId);
+            var entity = await _context.Categories
+                .Include(x => x.Posts)
+                .FirstOrDefaultAsync(x => x.Id == categoryId);
 
             if (entity == null) return null;
 
@@ -66,7 +69,8 @@ namespace PostBoard.Server.Services.Categroy
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Description = entity.Description
+                Description = entity.Description,
+                Posts = (List<PostListItem>)entity.Posts
             };
 
             return category;
