@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Shared\Comment\" />
-    <Folder Include="Shared\Category\" />
   </ItemGroup>
 
 </Project>
