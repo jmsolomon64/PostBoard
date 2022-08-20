@@ -37,7 +37,7 @@ namespace PostBoard.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CategoryCreate model)
         {
-            if (model == null) return BadRequest();
+            if (model == null || !ModelState.IsValid) return BadRequest(model);
 
             bool success = await _category.CreateCategoryAsync(model);
 
@@ -48,7 +48,7 @@ namespace PostBoard.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCategory(int id, CategoryEdit model)
         {
-            if (model == null) return BadRequest();
+            if (model == null || !ModelState.IsValid) return BadRequest(model);
 
             bool success = await _category.UpdateCategoryAsync(model);
 

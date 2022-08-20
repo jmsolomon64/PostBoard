@@ -41,7 +41,7 @@ namespace PostBoard.Server.Services.Comment
             return await _context.SaveChangesAsync() == 1;
         }
 
-        public async Task<ICollection<CommentDetail>> GetAllCommentsAsync(int postId)
+        public async Task<List<CommentDetail>> GetAllCommentsAsync(int postId)
         {
             var commentQuery = _context.Comments
                 .Where(x => x.PostId == postId)
@@ -55,6 +55,21 @@ namespace PostBoard.Server.Services.Comment
 
             if (commentQuery == null) return null;
             return await commentQuery.ToListAsync();
+        }
+
+        public async Task<CommentDetail> GetCommentByIdAsync(int id)
+        {
+            var entity = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (entity == null) return null;
+
+            return new CommentDetail()
+            {
+                Id = entity.Id,
+                Posted = entity.Posted,
+                Modified = entity.Modified,
+                Content = entity.Content
+            };
         }
 
         public async Task<bool> UpdateCommentAsync(CommentEdit model)

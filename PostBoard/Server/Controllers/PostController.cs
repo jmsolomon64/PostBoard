@@ -74,7 +74,7 @@ namespace PostBoard.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PostCreate model)
         {
-            if (model == null) return BadRequest();
+            if (model == null || !ModelState.IsValid) return BadRequest(model);
             if (!SetUserIdInService()) return Unauthorized();
 
             bool success = await _post.CreatePostAsync(model);
@@ -87,7 +87,7 @@ namespace PostBoard.Server.Controllers
         public async Task<IActionResult> Edit(int id, PostEdit model)
         {
             if (!SetUserIdInService()) return Unauthorized();
-            if (model == null) return BadRequest();
+            if (model == null || !ModelState.IsValid) return BadRequest(model);
 
             bool success = await _post.UpdatePostAsync(model);
 
