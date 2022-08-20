@@ -18,23 +18,11 @@
         <ValidationSummary />
         <div class="form-group">
             <label class="control-label">Category</label>
-            <InputSelect @bind-Value="model.CategoryId" class="form-control">
-                @if(categories == null)
-                {
-                    <option value="0">No categories available</option>
-                }
-                else
-                {
-                    @foreach (CategoryListItem category in categories)
-                    {
-                        <option value="@category.Id">@category.Name</option>
-                    }
-                }
-            </InputSelect>
+            <InputNumber class="form-control" @bind-Value="model.CategoryId" />
         </div>
         <div class="form-group">
             <label class="control-label">Title</label>
-            <InputText class="form-control" @bind-Value="model." />
+            <InputText class="form-control" @bind-Value="model.Title" />
         </div>
         <div class="form-group">
             <label class="control-label">Content</label>
@@ -45,7 +33,7 @@
 </div>
 
 @code {
-    private PostCreate model = new ();
+    public PostCreate model = new PostCreate();
     private string errorMessage;
     private List<CategoryListItem> categories;
 
