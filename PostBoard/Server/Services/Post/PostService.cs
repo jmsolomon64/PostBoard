@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PostBoard.Client.Shared.Comment;
 using PostBoard.Client.Shared.Post;
 using PostBoard.Server.Data;
 using PostBoard.Server.Models;
@@ -80,9 +81,23 @@ namespace PostBoard.Server.Services.Post
             return await postQuery.ToListAsync();
         }
 
-        public Task<PostDetail> GetPostByIdAsync(int postId)
+        public async Task<PostDetail> GetPostByIdAsync(int postId)
         {
-            throw new NotImplementedException();
+            var entity = await _context.Posts
+                .Include(x => x.Comments)
+                .FirstOrDefaultAsync(x => x.Id == postId);
+
+            if(entity == null) return null;
+
+            return new PostDetail()
+            {
+                CategoryId = entity.CategoryId,
+                Posted = entity.Posted,
+                Modified = entity.Modified,
+                Title = entity.Title,
+                Content = entity.Content,
+                Comments = (List<CommentDetail>)entity.Comments
+            };
         }
 
 
