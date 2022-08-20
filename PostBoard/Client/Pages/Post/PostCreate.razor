@@ -1,0 +1,49 @@
+﻿@page "/category/create"
+@attribute [Authorize]
+@inject HttpClient http
+@using PostBoard.Client.Shared.Category
+@using PostBoard.Client.Shared.Post
+@inject NavigationManager nav 
+
+<h3>What's On Your Mind?</h3>
+
+@if(errorMessage != null)
+{
+    <h5 class="text-danger">@errorMessage</h5>
+}
+
+<div class="container">
+    <EditForm Model="@model" OnValidSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group">
+            <label class="control-label">Category</label>
+            <InputSelect @bind-Value="model.CategoryId" class="form-control">
+                @foreach (CategoryListItem category in categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Title</label>
+            <InputText class="form-control" @bind-Value="model.Title" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Content</label>
+            <InputText class="form-control" @bind-Value="model.Content" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
+    </EditForm>
+</div>
+
+@code {
+    private PostCreate model = new PostCreate();
+    private string errorMessage;
+    private List<CategoryListItem> categories;
+
+    private async void HandleSubmit()
+    {
+        var createResults = await http.PostAsJsonAsync<PostCreate>("/api/")
+    }
+}

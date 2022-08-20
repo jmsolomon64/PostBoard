@@ -1,11 +1,12 @@
 ﻿using DocumentFormat.OpenXml.Office2021.PowerPoint.Comment;
+using PostBoard.Client.Shared.Category;
 using PostBoard.Client.Shared.Comment;
 
 namespace PostBoard.Client.Shared.Post
 {
     public class PostDetail
     {
-        public int CategoryId { get; set; }
+        public CategoryListItem Category { get; set; }
         public DateTime Posted { get; set; } 
         public DateTime Modified { get; set; }
         public string Title { get; set; }

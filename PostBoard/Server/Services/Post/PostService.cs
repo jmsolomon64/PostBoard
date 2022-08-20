@@ -1,14 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PostBoard.Client.Shared.Category;
 using PostBoard.Client.Shared.Comment;
 using PostBoard.Client.Shared.Post;
 using PostBoard.Server.Data;
 using PostBoard.Server.Models;
+using PostBoard.Server.Services.Categroy;
 
 namespace PostBoard.Server.Services.Post
 {
     public class PostService : IPostService
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICategoryService _category;
         private string _userId;
 
         public PostService(ApplicationDbContext context)
@@ -23,6 +26,7 @@ namespace PostBoard.Server.Services.Post
             var entity = new PostEntity()
             {
                 CategoryId = model.CategoryId,
+                Category = await _category.GetCategoryEntityAsync(model.CategoryId),
                 OwnerId = _userId,
                 Posted = DateTime.Now,
                 Title = model.Title,
@@ -107,7 +111,11 @@ namespace PostBoard.Server.Services.Post
 
             return new PostDetail()
             {
-                CategoryId = entity.CategoryId,
+                Category = new CategoryListItem()
+                {
+                    Id = entity.Id,
+                    Name = entity.Category.Name,
+                },
                 Posted = entity.Posted,
                 Modified = entity.Modified,
                 Title = entity.Title,
@@ -128,6 +136,7 @@ namespace PostBoard.Server.Services.Post
 
             entity.Title = model.Title;
             entity.CategoryId = model.CategoryId;
+            entity.Category = await _category.GetCategoryEntityAsync(model.CategoryId);
             entity.Title = model.Title;
             entity.Content = model.Content;
             entity.Modified = DateTime.Now;

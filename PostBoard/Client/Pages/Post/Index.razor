@@ -1,0 +1,51 @@
+﻿@page "/post/index"
+@using PostBoard.Client.Shared.Post
+@inject HttpClient Http
+@attribute [Authorize]
+
+<h3>Posts</h3>
+
+<a href="/category/create">Create a Post</a>
+
+@if (posts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>Id</tr>
+            <tr>Category</tr>
+            <tr>Title</tr>
+            <tr>Posted</tr>
+            <tr>Modified</tr>
+        </thead>
+        <tbody>
+            @foreach (PostListItem post in posts)
+            {
+                <tr>@post.Id</tr>
+                <tr>@post.CategoryName</tr>
+                <tr>@post.Title</tr>
+                <tr>@post.Posted</tr>
+                @if(post.Modified == null)
+                {
+                    <tr>Unmodified</tr>
+                }
+                else
+                {
+                    <tr>@post.Modified</tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<PostListItem> posts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        posts = await Http.GetFromJsonAsync<List<PostListItem>>("Post");
+    }
+}

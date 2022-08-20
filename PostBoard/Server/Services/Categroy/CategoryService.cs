@@ -48,6 +48,14 @@ namespace PostBoard.Server.Services.Categroy
             return await categoryQuery.ToListAsync();
         }
 
+        public async Task<CategoryEntity> GetCategoryEntityAsync(int categoryId)
+        {
+            var entity = await _context.Categories.FirstOrDefaultAsync(x => x.Id == categoryId);
+
+            if (entity == null) return null;
+            return entity;
+        }
+
         public async Task<CategoryDetail> GetCategoryByIdAsync(int categoryId)
         {
             var entity = await _context.Categories.FirstOrDefaultAsync(x => x.Id == categoryId);
