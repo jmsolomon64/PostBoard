@@ -2,7 +2,7 @@
 
 namespace PostBoard.Server.Models
 {
-    public class Comment
+    public class CommentEntity
     {
         [Required]
         public int Id { get; set; }
