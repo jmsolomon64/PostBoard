@@ -1,7 +1,7 @@
-﻿using PostBoard.Shared.Category;
-using PostBoard.Shared.Comment;
+﻿using PostBoard.Shared.Models.Category;
+using PostBoard.Shared.Models.Comment;
 
-namespace PostBoard.Shared.Post
+namespace PostBoard.Shared.Models.Post
 {
     public class PostDetail
     {

@@ -1,4 +1,4 @@
-﻿using PostBoard.Shared.Post;
+﻿using PostBoard.Shared.Models.Post;
 
 namespace PostBoard.Server.Services.Post
 {

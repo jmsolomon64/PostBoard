@@ -1,53 +1,8 @@
 ﻿@page "/post/create"
-@attribute [Authorize]
-@inject HttpClient http
-@using PostBoard.Shared.Category
 @using PostBoard.Shared.Post
-@inject NavigationManager nav 
 
-<h3>What's On Your Mind?</h3>
-
-@if(errorMessage != null)
-{
-    <h5 class="text-danger">@errorMessage</h5>
-}
-
-<div class="container">
-    <EditForm Model="@model" OnValidSubmit="@HandleSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <div class="form-group">
-            <label class="control-label">Category</label>
-            <InputNumber class="form-control" @bind-Value="model.CategoryId" />
-        </div>
-        <div class="form-group">
-            <label class="control-label">Title</label>
-            <InputText class="form-control" @bind-Value="model.Title" />
-        </div>
-        <div class="form-group">
-            <label class="control-label">Content</label>
-            <InputText class="form-control" @bind-Value="model.Content" />
-        </div>
-        <button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
-    </EditForm>
-</div>
+<h3>PostCreate</h3>
 
 @code {
-    public PostCreate model = new PostCreate();
-    private string errorMessage;
-    private List<CategoryListItem> categories;
 
-    private async void HandleSubmit()
-    {
-        var createResults = await http.PostAsJsonAsync<PostCreate>("/api/post", model);
-
-        if(createResults.IsSuccessStatusCode)
-        {
-            nav.NavigateTo("/post");
-        }
-        else
-        {
-            errorMessage = "Could not publish Post. Please try again later.";
-        }
-    }
 }

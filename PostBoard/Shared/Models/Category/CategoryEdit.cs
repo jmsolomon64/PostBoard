@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PostBoard.Shared.Category
+namespace PostBoard.Shared.Models.Category
 {
     public class CategoryEdit
     {

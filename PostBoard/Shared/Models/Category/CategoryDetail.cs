@@ -1,6 +1,6 @@
-﻿using PostBoard.Shared.Post;
+﻿using PostBoard.Shared.Models.Post;
 
-namespace PostBoard.Shared.Category
+namespace PostBoard.Shared.Models.Category
 {
     public class CategoryDetail
     {

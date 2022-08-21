@@ -1,4 +1,4 @@
-﻿namespace PostBoard.Shared.Post
+﻿namespace PostBoard.Shared.Models.Post
 {
     public class PostListItem
     {

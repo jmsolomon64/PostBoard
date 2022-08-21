@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PostBoard.Shared.Comment
+namespace PostBoard.Shared.Models.Comment
 {
     public class CommentCreate
     {

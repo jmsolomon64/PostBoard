@@ -1,4 +1,4 @@
-﻿using PostBoard.Shared.Comment;
+﻿using PostBoard.Shared.Models.Comment;
 
 namespace PostBoard.Server.Services.Comment
 {

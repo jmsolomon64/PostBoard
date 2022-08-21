@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PostBoard.Client.Shared.Post;
+using PostBoard.Shared.Models.Post;
 using PostBoard.Server.Services.Post;
 using System.Security.Claims;
 

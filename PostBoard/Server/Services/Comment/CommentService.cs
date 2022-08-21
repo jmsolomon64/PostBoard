@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PostBoard.Shared.Comment;
+using PostBoard.Shared.Models.Comment;
 using PostBoard.Server.Data;
 using PostBoard.Server.Models;
 

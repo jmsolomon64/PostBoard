@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PostBoard.Server.Services.Comment;
-using PostBoard.Client.Shared.Comment;
+using PostBoard.Shared.Models.Comment;
 using System.Security.Claims;
 
 namespace PostBoard.Server.Controllers

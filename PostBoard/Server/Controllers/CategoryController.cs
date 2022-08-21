@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PostBoard.Client.Shared.Category;
+using PostBoard.Shared.Models.Category;
 using PostBoard.Server.Services.Categroy;
 
 namespace PostBoard.Server.Controllers

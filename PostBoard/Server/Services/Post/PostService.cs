@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PostBoard.Shared.Category;
-using PostBoard.Shared.Comment;
-using PostBoard.Shared.Post;
+using PostBoard.Shared.Models.Category;
+using PostBoard.Shared.Models.Comment;
+using PostBoard.Shared.Models.Post;
 using PostBoard.Server.Data;
 using PostBoard.Server.Models;
 using PostBoard.Server.Services.Categroy;

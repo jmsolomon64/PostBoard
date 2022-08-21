@@ -1,4 +1,4 @@
-﻿using PostBoard.Shared.Category;
+﻿using PostBoard.Shared.Models.Category;
 using PostBoard.Server.Models;
 
 namespace PostBoard.Server.Services.Categroy

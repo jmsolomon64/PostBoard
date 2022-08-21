@@ -1,4 +1,4 @@
-﻿namespace PostBoard.Shared.Comment
+﻿namespace PostBoard.Shared.Models.Comment
 {
     public class CommentDetail
     {
