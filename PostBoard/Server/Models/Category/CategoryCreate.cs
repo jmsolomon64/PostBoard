@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PostBoard.Server.Models
+namespace PostBoard.Server.Models.Category
 {
-    public class Category
+    public class CategoryCreate
     {
-        [Required]
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PostBoard.Server.Data;
 
@@ -11,13 +12,14 @@ using PostBoard.Server.Data;
 namespace PostBoard.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221102133210_Updating")]
+    partial class Updating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -365,7 +367,7 @@ namespace PostBoard.Server.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("PostBoard.Server.Models.CategoryEntity", b =>
+            modelBuilder.Entity("PostBoard.Server.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -388,7 +390,7 @@ namespace PostBoard.Server.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("PostBoard.Server.Models.CommentEntity", b =>
+            modelBuilder.Entity("PostBoard.Server.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -401,9 +403,6 @@ namespace PostBoard.Server.Data.Migrations
                         .HasMaxLength(100000)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PostEntityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
@@ -412,21 +411,18 @@ namespace PostBoard.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostEntityId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("PostBoard.Server.Models.PostEntity", b =>
+            modelBuilder.Entity("PostBoard.Server.Models.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CategoryEntityId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -445,8 +441,6 @@ namespace PostBoard.Server.Data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryEntityId");
 
                     b.ToTable("Posts");
                 });
@@ -502,26 +496,16 @@ namespace PostBoard.Server.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PostBoard.Server.Models.CommentEntity", b =>
+            modelBuilder.Entity("PostBoard.Server.Models.Comment", b =>
                 {
-                    b.HasOne("PostBoard.Server.Models.PostEntity", null)
+                    b.HasOne("PostBoard.Server.Models.Post", null)
                         .WithMany("Comments")
-                        .HasForeignKey("PostEntityId");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("PostBoard.Server.Models.PostEntity", b =>
-                {
-                    b.HasOne("PostBoard.Server.Models.CategoryEntity", null)
-                        .WithMany("Posts")
-                        .HasForeignKey("CategoryEntityId");
-                });
-
-            modelBuilder.Entity("PostBoard.Server.Models.CategoryEntity", b =>
-                {
-                    b.Navigation("Posts");
-                });
-
-            modelBuilder.Entity("PostBoard.Server.Models.PostEntity", b =>
+            modelBuilder.Entity("PostBoard.Server.Models.Post", b =>
                 {
                     b.Navigation("Comments");
                 });

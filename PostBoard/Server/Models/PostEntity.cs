@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PostBoard.Server.Models
 {
-    public class Post
+    public class PostEntity
     {
         [Key]
         public int Id { get; set; }
@@ -22,11 +22,11 @@ namespace PostBoard.Server.Models
         [MaxLength(100000000)]
         public string Content { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<CommentEntity> Comments { get; set; }
 
-        public Post()
+        public PostEntity()
         {
-            Comments = new List<Comment>();
+            Comments = new List<CommentEntity>();
         }
     }
 }
