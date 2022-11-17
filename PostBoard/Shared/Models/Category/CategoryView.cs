@@ -1,6 +1,6 @@
-﻿using PostBoard.Server.Models.Post;
+﻿using PostBoard.Shared.Models.Post;
 
-namespace PostBoard.Server.Models.Category
+namespace PostBoard.Shared.Models.Category
 {
     public class CategoryView
     {

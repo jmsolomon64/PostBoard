@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using PostBoard.Server.Data;
 using PostBoard.Server.Models;
+using PostBoard.Server.Services.Category;
+using PostBoard.Server.Services.Comment;
+using PostBoard.Server.Services.Post;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,13 +21,26 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
+builder.Services.AddScoped<ICategoryServices, CategoryServices>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "PostBoardAPI");
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

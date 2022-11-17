@@ -1,0 +1,38 @@
+﻿@using PostBoard.Client.Services.Post;
+@using PostBoard.Shared.Models.Post;
+@page "/Posts/ViewAll"
+
+<h3>ViewAllPosts</h3>
+<h3>@client.BaseAddress</h3>
+<button class="btn btn-primary" @onclick="PostMaker">Generate</button>
+
+<hr/>
+
+
+
+<table>
+    <thead>
+        <tr>Title </tr>
+        <tr>Id </tr>
+        <tr>Posted </tr>
+        <tr>Comments </tr>
+    </thead>
+    <tbody>
+        @foreach (PostListView post in _posts)
+        {
+            <PostListItem PostItem="@post"/>
+        }
+    </tbody>
+</table>
+
+@foreach (PostDetailView post in postDetails)
+{
+    <PostDetails PostDetail="@post"/>
+}
+
+@code {
+    
+
+    
+
+}

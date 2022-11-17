@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PostBoard.Server.Data;
-using PostBoard.Server.Models.Category;
-using PostBoard.Server.Models.Post;
+using PostBoard.Server.Models;
+using PostBoard.Shared.Models.Category;
+using PostBoard.Shared.Models.Post;
 
 namespace PostBoard.Server.Services.Category
 {
-    public class CategoryServices
+    public class CategoryServices : ICategoryServices
     {
         private readonly ApplicationDbContext _ctx;
 
@@ -32,13 +33,16 @@ namespace PostBoard.Server.Services.Category
         {
             List<PostListView> categoryPosts = new List<PostListView>();
 
+            //Find Specific category, include the Posts
             var entity = _ctx.Categories
                 .Include(x => x.Posts)
                 .FirstOrDefault(x => x.Id == id);
 
+            //Makes sure query returned something
             if (entity == null) return null;
 
-            foreach(var post in entity.Posts)
+            //Loops through posts in Entity and creates them into PostListItems
+            foreach (var post in entity.Posts)
             {
                 PostListView item = new PostListView
                 {
@@ -47,25 +51,68 @@ namespace PostBoard.Server.Services.Category
                     Title = post.Title,
                     //need to add injection to comment service to pull amount of comments
                 };
+                categoryPosts.Add(item);
             }
+
+            //CategoryView with posts appended
             CategoryView category = new CategoryView
             {
                 Name = entity.Name,
-                Description = entity.Description
+                Description = entity.Description,
+                Posts = categoryPosts
             };
-
-
 
             return category;
         }
 
-        private string GetCategoryName(int id)
+        public bool AddCategory(CategoryCreate category)
+        {
+            var entity = new CategoryEntity()
+            {
+                Name = category.Name,
+                Description = category.Description
+            };
+
+            _ctx.Categories.Add(entity);
+            return _ctx.SaveChanges() > 0;
+        }
+
+        public bool UpdateCategory(CategoryCreate category, int id)
+        {
+            var entity = _ctx.Categories.FirstOrDefault(x => x.Id == id);
+            if (entity == null) return false;
+
+            entity.Name = category.Name;
+            entity.Description = category.Description;
+
+            return _ctx.SaveChanges() > 0;
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            var entity = _ctx.Categories.FirstOrDefault(x => x.Id == id);
+
+            if (entity == null) return false;
+
+            _ctx.Categories.Remove(entity);
+            return _ctx.SaveChanges() > 0;
+        }
+
+        public string GetCategoryName(int id)
         {
             string name = _ctx.Categories.FirstOrDefault(x => x.Id == id).Name;
 
             if (name == null) return null;
 
             return name;
+        }
+
+        public CategoryEntity GetCategoryEntity(int id)
+        {
+            var entity = _ctx.Categories.FirstOrDefault(x => x.Id == id);
+
+            if (entity == null) return null;
+            return entity;
         }
     }
 }

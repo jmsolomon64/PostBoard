@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PostBoard.Server.Models.Category
+namespace PostBoard.Shared.Models.Category
 {
     public class CategoryCreate
     {

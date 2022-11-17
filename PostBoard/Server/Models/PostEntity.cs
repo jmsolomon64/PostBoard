@@ -11,6 +11,8 @@ namespace PostBoard.Server.Models
         [Required]
         public int CategoryId { get; set; }
 
+        public virtual CategoryEntity Category { get; set; }
+
         [Required]
         public DateTime Posted { get; set; }
 

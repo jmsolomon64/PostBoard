@@ -1,9 +1,10 @@
-﻿using PostBoard.Server.Models.Comment;
+﻿using PostBoard.Shared.Models.Comment;
 
-namespace PostBoard.Server.Models.Post
+namespace PostBoard.Shared.Models.Post
 {
-    public class PostDetailViews
+    public class PostDetailView
     {
+        public int Id { get; set; }
         public string Category { get; set; }
         public DateTime Posted { get; set; }
         public string Title { get; set; }
